@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+    <title>Movie Filter</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
+  <style>
+    /* Add custom styles */
+    
+
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+
+    body {
+      font-family: "Amatic SC", sans-serif;
+      padding: 20px;
+      background-image: url('/Users/anees/Desktop/one.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+.container {
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+}
+
+.form-select {
+    text-align: center;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.7);
+      transition: background-color 0.2s ease-in-out;
+      color: #333;
+      font-size: 16px;
+      font-family: "PT Sans", Calibri, Tahoma, sans-serif;
+      text-transform: uppercase;
+    }
+
+    .form-select:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+.movie-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.movie-item {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-family: "Amatic SC", sans-serif;
+  text-transform: uppercase;
+}
+
+.movie-item:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f1c40f 0%, #e74c3c 100%);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.container:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 3px, transparent 3px, transparent 6px);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.results-container {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 5px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    Cinematica
+
+    <!-- Filter dropdowns -->
+    <div class="mb-3">
+      <label for="actor-select" class="form-label">Actor:</label>
+      <select id="actor-select" class="form-select">
+        <option value="">All Actors</option>
+        <option value="actor1">Actor 1</option>
+        <option value="actor2">Actor 2</option>
+        <option value="actor3">Actor 3</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="actress-select" class="form-label">Actress:</label>
+      <select id="actress-select" class="form-select">
+        <option value="">All Actresses</option>
+        <option value="actress1">Actress 1</option>
+        <option value="actress2">Actress 2</option>
+        <option value="actress3">Actress 3</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="director-select" class="form-label">Director:</label>
+      <select id="director-select" class="form-select">
+        <option value="">All Directors</option>
+        <option value="director1">Director 1</option>
+        <option value="director2">Director 2</option>
+        <option value="director3">Director 3</option>
+      </select>
+    </div>
+
+    <!-- Movie results -->
+    <ul class="movie-list" id="movie-list">
+      <!-- Movie items will be dynamically added here -->
+    </ul>
+    <div class="results-container">
+        <h3>Movie Results</h3>
+        <ul class="movie-list" id="movie-list">
+          <!-- Movie items will be dynamically added here -->
+        </ul>
+      </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+  <script>
+    // Sample movie data
+    const movies = [
+      { title: 'Movie 1', actor: 'actor1', actress: 'actress1', director: 'director1' },
+      { title: 'Movie 2', actor: 'actor2', actress: 'actress2', director: 'director2' },
+      { title: 'Movie 3', actor: 'actor1', actress: 'actress3', director: 'director3' },
+      { title: 'Movie 4', actor: 'actor3', actress: 'actress1', director: 'director2' },
+      { title: 'Movie 5', actor: 'actor2', actress: 'actress2', director: 'director1' },
+    ];
+
+    // Function to filter and display movies
+    function filterMovies() {
+      const actorFilter = document.getElementById('actor-select').value;
+      const actressFilter = document.getElementById('actress-select').value;
+      const directorFilter = document.getElementById('director-select').value;
+
+      // Clear movie list
+      const movieList = document.getElementById
